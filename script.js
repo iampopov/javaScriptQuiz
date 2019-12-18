@@ -42,6 +42,7 @@ function startQuiz () {
     startBtnEL = document.getElementById("startBtn");
     startBtnEL.classList.add("d-none"); //hides the start button - works well
     getChoices();
+    setTime(); 
 }
 
 function getChoices() {
@@ -95,7 +96,7 @@ function getChoices() {
         }, 1000);
         
     }
-    setTime(); 
+    
 
 startBtnEL.addEventListener("click", startQuiz);
 
