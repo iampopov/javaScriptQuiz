@@ -26,10 +26,6 @@ var myQuestions = [
         correctAnswer: 0
     }
 ]
-// var aBtnEL = document.getElementById("aBtn");
-// var bBtnEL = document.getElementById("bBtn");
-// var cBtnEL = document.getElementById("cBtn");
-
 var header1El = document.getElementById("header1");
 var contentEl = document.getElementById("content");
 var startBtnEL = document.getElementById("startBtn");
@@ -39,33 +35,37 @@ var feedbackEl = document.getElementById("feedback");
 var choicesEl = document.getElementById("choices")
 var score = 0;
 var secondsLeft = 60;
-var currentQuesEl = 0;
-var currentQuestion = myQuestions[currentQuesEl];
-// var choicesEl = document.getElementById("choices");
+var currentQuestionIndex = 0;
+var currentQuestion = myQuestions[currentQuestionIndex];
 
-function startQuiz (e) {
-    e.preventDefault();
+function startQuiz () {
+    startBtnEL = document.getElementById("startBtn");
     startBtnEL.classList.add("d-none"); //hides the start button - works well
-    questionEL.textContent = myQuestions[currentQuesEl].question;
-    
-    function getChoices() {
-        console.log(currentQuestion.choices);
-        currentQuestion.choices.forEach( function (choice, i) {
-            var choiceButton = document.createElement("button");
-            choicesEl.appendChild(choiceButton);
-            choiceButton.setAttribute("class", "btn btn-success");
-            choiceButton.setAttribute("value", i);
-            choiceButton.textContent = i + 1 + ". "+choice;
-            choiceButton.onclick = questionClick;
-        }
-        ) 
-    }
     getChoices();
-    
+}
+
+function getChoices() {
+    // e.preventDefault();
+    //console.log(currentQuestion.choices); works
+    var currentQuestion = myQuestions[currentQuestionIndex];
+    var titleEL = document.getElementById("main");
+    titleEL.textContent = currentQuestion.question;
+    choicesEl.innerHTML = "";
+    currentQuestion.choices.forEach( function (choice, i) {
+        var choiceButton = document.createElement("button");
+        choicesEl.appendChild(choiceButton);
+        choiceButton.setAttribute("class", "btn btn-success");
+        choiceButton.setAttribute("value", i);
+        choiceButton.textContent = i + 1 + ". "+choice;
+        choiceButton.onclick = questionClick;
+        }
+    ) 
+}
+    console.log(currentQuestionIndex);
     function questionClick (e) {
         e.preventDefault();
-        console.log(this.value);
-        if (this.value != myQuestions[currentQuesEl].correctAnswer) {
+        // console.log(this.value);
+        if (this.value != myQuestions[currentQuestionIndex].correctAnswer) {
             secondsLeft -= 10;
             if (secondsLeft < 0) {
                 secondsLeft = 0;
@@ -76,11 +76,11 @@ function startQuiz (e) {
         } else { //if correct
             feedbackEl.textContent = "Correct";
             score++;
+            // console.log(score); score works
         }
-        currentQuesEl++;
-        function nextQuestion () {
-            
-        }
+        currentQuestionIndex++;
+        getChoices();
+        console.log(currentQuestionIndex);
     }
     
     function setTime() {
@@ -95,16 +95,70 @@ function startQuiz (e) {
         }, 1000);
         
     }
-    setTime();
-}
-
-
-
-console.log(myQuestions[currentQuesEl].question)
-console.log(myQuestions[currentQuesEl].choices.a)
+    setTime(); 
 
 startBtnEL.addEventListener("click", startQuiz);
-//     currentQuesEl++;
+
+    // function startQuiz (e) {
+    //     e.preventDefault();
+    //     startBtnEL.classList.add("d-none"); //hides the start button - works well
+    //     questionEL.textContent = myQuestions[currentQuestionIndex].question;
+        
+    //     function getChoices() {
+    //         console.log(currentQuestion.choices);
+    //         currentQuestion.choices.forEach( function (choice, i) {
+    //             var choiceButton = document.createElement("button");
+    //             choicesEl.appendChild(choiceButton);
+    //             choiceButton.setAttribute("class", "btn btn-success");
+    //             choiceButton.setAttribute("value", i);
+    //             choiceButton.textContent = i + 1 + ". "+choice;
+    //             choiceButton.onclick = questionClick;
+    //         }
+    //         ) 
+    //     }
+    //     getChoices();
+        
+    //     function questionClick (e) {
+    //         e.preventDefault();
+    //         console.log(this.value);
+    //         if (this.value != myQuestions[currentQuestionIndex].correctAnswer) {
+    //             secondsLeft -= 10;
+    //             if (secondsLeft < 0) {
+    //                 secondsLeft = 0;
+    //             }
+                
+    //             timeEl.textContent = time;
+    //             feedbackEl.textContent = "Incorrect";
+    //         } else { //if correct
+    //             feedbackEl.textContent = "Correct";
+    //             score++;
+    //         }
+    //         currentQuestionIndex++;
+    //         function nextQuestion () {
+    
+    //         }
+    //     }
+        
+    //     function setTime() {
+    //         var timerInterval = setInterval(function() {
+    //             secondsLeft--;
+    //             timeEl.textContent = secondsLeft;
+                
+    //             if(secondsLeft === 0) {
+    //                 clearInterval(timerInterval);
+    //             }
+                
+    //         }, 1000);
+            
+    //     }
+    //     setTime();
+    // }
+    
+    
+    
+    // console.log(myQuestions[currentQuestionIndex].question)
+    // console.log(myQuestions[currentQuestionIndex].choices.a)
+//     currentQuestionIndex++;
 // aBtnEL.classList.remove('d-none')
 // bBtnEL.classList.remove('d-none')
 // cBtnEL.classList.remove('d-none')
@@ -113,25 +167,25 @@ startBtnEL.addEventListener("click", startQuiz);
 // bBtnEL.addEventListener("click", questionClick);
 // cBtnEL.addEventListener("click", questionClick);
 
-// aBtnEL.textContent = myQuestions[currentQuesEl].choices.a;
-// bBtnEL.textContent = myQuestions[currentQuesEl].choices.b;
-// cBtnEL.textContent = myQuestions[currentQuesEl].choices.c;
+// aBtnEL.textContent = myQuestions[currentQuestionIndex].choices.a;
+// bBtnEL.textContent = myQuestions[currentQuestionIndex].choices.b;
+// cBtnEL.textContent = myQuestions[currentQuestionIndex].choices.c;
 
 // console.log (questions[0].answer)
 // console.log (startBtnEL.addEventListener);
 // bBtnEL.classList.remove('d-none')
 // cBtnEL.classList.remove('d-none')
-// aBtnEL.textContent = questions[currentQuesEl].choices[0];
-// bBtnEL.textContent = questions[currentQuesEl].choices[1];
-// cBtnEL.textContent = questions[currentQuesEl].choices[2];
+// aBtnEL.textContent = questions[currentQuestionIndex].choices[0];
+// bBtnEL.textContent = questions[currentQuestionIndex].choices[1];
+// cBtnEL.textContent = questions[currentQuestionIndex].choices[2];
 
 // function questionClick(e) {
     //     e.preventDefault();
     //     aBtnEL.onclick() = "a"
     
-    //     if (this.value !== questions[currentQuesEl].answer) { //if wrong
+    //     if (this.value !== questions[currentQuestionIndex].answer) { //if wrong
     //         console.log(this.value)
-    //         console.log (questions[currentQuesEl].answer);
+    //         console.log (questions[currentQuestionIndex].answer);
     //         secondsLeft -= 10;
     //         if (secondsLeft < 0) {
         //             secondsLeft = 0;
