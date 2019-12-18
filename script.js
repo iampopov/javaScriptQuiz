@@ -1,43 +1,42 @@
 var myQuestions = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
-        choices: {
-           "a": "In script element",
-           "b": "In js element",
-           "c": "In header element"
-        },
-        correctAnswer: "a"
+        choices: 
+           ["In script element",
+           "In js element",
+           "In header element"],
+        correctAnswer: 0
     },
     {   
         question: "Where is the correct place to insert a JavaScript?",
-        choices: {
-            "a":  "In the body section",
-            "b":  "In the head section",
-            "c":  "Either body or head section"
-        },
-        correctAnswer: "a" 
+        choices: 
+            ["In the body section",
+            "In the head section",
+            "Either body or head section"],
+
+        correctAnswer: 0 
         
     },
     {
         question: "How do you write 'Hello World' in an alert box?",
-        choices: {
-           "a": "alert('Hello World')",
-           "b": "msg('Hello World')",
-           "c": "alertBox('Hello World')"
-        },
-        correctAnswer: "a"
+        choices: 
+           ["alert('Hello World')",
+           "msg('Hello World')",
+           "alertBox('Hello World')"],
+        correctAnswer: 0
     }
 ]
+// var aBtnEL = document.getElementById("aBtn");
+// var bBtnEL = document.getElementById("bBtn");
+// var cBtnEL = document.getElementById("cBtn");
 
 var header1El = document.getElementById("header1");
 var contentEl = document.getElementById("content");
 var startBtnEL = document.getElementById("startBtn");
 var questionEL = document.getElementById("main");
 var timeEl = document.querySelector("#time");
-var aBtnEL = document.getElementById("aBtn");
-var bBtnEL = document.getElementById("bBtn");
-var cBtnEL = document.getElementById("cBtn");
 var feedbackEl = document.getElementById("feedback");
+var choicesEl = document.getElementById("choices")
 var score = 0;
 var secondsLeft = 60;
 var currentQuesEl = 0;
@@ -48,31 +47,25 @@ function startQuiz (e) {
     e.preventDefault();
     startBtnEL.classList.add("d-none"); //hides the start button - works well
     questionEL.textContent = myQuestions[currentQuesEl].question;
-    getChoices();
     
     function getChoices() {
-        var choices = document.getElementById("choices");
-        choices.innerHTML = "";
-        for (i = 0; i < myQuestions.choices.length; i++) {
+        console.log(currentQuestion.choices);
+        currentQuestion.choices.forEach( function (choice, i) {
             var choiceButton = document.createElement("button");
-            choiceButton.setAttribute("value", )
+            choicesEl.appendChild(choiceButton);
+            choiceButton.setAttribute("class", "btn btn-success");
+            choiceButton.setAttribute("value", i);
+            choiceButton.textContent = i + 1 + ". "+choice;
+            choiceButton.onclick = questionClick;
         }
-        
-        // currentQuestion.choices.forEach(
-        //     function (choice, i) {
-        //         var choiceButton = document.createElement("button");
-        //         choiceButton.setAttribute("class", "btn btn-success");
-        //         choiceButton.setAttribute("value", choice);
-        //         choiceButton.textContent = i + 1 + ". "+choice;
-        //         choiceButton.onclick = questionClick;
-        //         choicesEl.appendChild(choiceButton);
-        //     }
         ) 
     }
+    getChoices();
     
     function questionClick (e) {
         e.preventDefault();
-        if (this.value !== myQuestions[currentQuesEl].correctAnswer) {
+        console.log(this.value);
+        if (this.value != myQuestions[currentQuesEl].correctAnswer) {
             secondsLeft -= 10;
             if (secondsLeft < 0) {
                 secondsLeft = 0;
@@ -85,29 +78,33 @@ function startQuiz (e) {
             score++;
         }
         currentQuesEl++;
+        function nextQuestion () {
+            
+        }
     }
     
+    function setTime() {
+        var timerInterval = setInterval(function() {
+            secondsLeft--;
+            timeEl.textContent = secondsLeft;
+            
+            if(secondsLeft === 0) {
+                clearInterval(timerInterval);
+            }
+            
+        }, 1000);
+        
+    }
+    setTime();
 }
 
-function setTime() {
-    var timerInterval = setInterval(function() {
-        secondsLeft--;
-        timeEl.textContent = secondsLeft;
-        
-        if(secondsLeft === 0) {
-            clearInterval(timerInterval);
-        }
-        
-    }, 1000);
-    
-}
-setTime();
 
 
 console.log(myQuestions[currentQuesEl].question)
 console.log(myQuestions[currentQuesEl].choices.a)
 
 startBtnEL.addEventListener("click", startQuiz);
+//     currentQuesEl++;
 // aBtnEL.classList.remove('d-none')
 // bBtnEL.classList.remove('d-none')
 // cBtnEL.classList.remove('d-none')
@@ -144,6 +141,5 @@ startBtnEL.addEventListener("click", startQuiz);
                 //     } else { //if correct
                 //         feedbackEl.textContent = "Correct";
                 //     }
-                //     currentQuesEl++;
                     
                 // }
