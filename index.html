@@ -9,18 +9,23 @@
 </head>
 <body>
     <div class="col-md container" id="content">
-        <div class="row"><h1 class="col-md-10" id="header1">Welcome to the JavaScript Quiz</h1><div class="col-md-2" id="time">Timer</div></div>
+        <div class="row"><h1 class="col-md-10" id="header1">Welcome to the JavaScript Quiz</h1>
+            <div class="col-md-1" id="time">Timer</div>
+            <div class="col-md-1" id="feedback">Feedback</div>
+        </div>
         
         <h7 id="main" class="row">This quiz is timed and there are only five easy questions. If you got the question right you get one point. If you got it wrong you loose time.</h7>
-        <div class="row">
+        <div id="choices" class="row">
             <button type="button" id="startBtn" class="btn btn-success">Star</button>
-            <button type="button" id="aBtn" class="btn btn-success d-none">a</button>
+            <!-- <button type="button" id="aBtn" class="btn btn-success d-none">a</button>
             <button type="button" id="bBtn" class="btn btn-success d-none">b</button>
-            <button type="button" id="cBtn" class="btn btn-success d-none">c</button>
+            <button type="button" id="cBtn" class="btn btn-success d-none">c</button> -->
         </div>
         <h2 id="countdown"></h2>
+        <div id="quizContainer"></div>
     </div>
 
+    <!-- <script src="quiz.js"></script> -->
     <script src="script.js"></script>
 </body>
 </html>
