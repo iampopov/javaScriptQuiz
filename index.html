@@ -23,12 +23,7 @@
         </div>
         <div class="row">
             <!-- initials element -->
-        <div id="finalID" class="input-group input-group-sm mb-3 col-md-3 d-none">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Enter your initials</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        </div>
+            <input type="text" name="Initials" id="finalID" placeholder="Enter your initials" class="col-md-2 d-none">
             <!-- scores element -->
         <div id="finalScore" class="input-group input-group-sm mb-3 col-md-2 d-none">
             <div class="input-group-prepend">
@@ -36,7 +31,7 @@
                 </div>
             <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
-        
+        <button type="button" id="storeBtn" class="btn btn-success d-none">Store Results</button>
         </div>
         <h2 id="countdown"></h2>
         <div id="quizContainer"></div>

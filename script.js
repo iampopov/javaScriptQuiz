@@ -1,6 +1,7 @@
 var header1El = document.getElementById("header1");
 var contentEl = document.getElementById("content");
 var startBtnEL = document.getElementById("startBtn");
+var storeBtnEl = document.getElementById("storeBtn");
 var questionEL = document.getElementById("main");
 var timeEl = document.querySelector("#time");
 var feedbackEl = document.getElementById("feedback");
@@ -82,11 +83,18 @@ function getChoices() {
         feedbackEl.classList.add("d-none");
         finalIDEl.classList.remove("d-none");
         finalScore.classList.remove("d-none");
+        storeBtnEl.classList.remove("d-none");
+    }
+
+    function storeResults() {
+        localStorage.setItem("Initials", finalIDEl.value);
+        localStorage.setItem("score", score);
+        alert("Results stored");
     }
     
 
 startBtnEL.addEventListener("click", startQuiz);
-
+storeBtnEl.addEventListener("click", storeResults);
     // if (currentQuestionIndex===myQuestions.length-1 || secondsLeft <= 0) { //ending the quiz
     //     quizResults();
     // }
