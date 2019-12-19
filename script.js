@@ -43,6 +43,9 @@ function startQuiz () {
     startBtnEL.classList.add("d-none"); //hides the start button - works well
     getChoices();
     setTime(); 
+    // if (currentQuestionIndex===myQuestions.length-1 || secondsLeft <= 0) { //ending the quiz
+    //     quizResults();
+    // }
 }
 
 function getChoices() {
@@ -64,6 +67,7 @@ function getChoices() {
 }
     console.log(currentQuestionIndex);
     function questionClick (e) {
+        
         e.preventDefault();
         // console.log(this.value);
         if (this.value != myQuestions[currentQuestionIndex].correctAnswer) {
@@ -80,6 +84,10 @@ function getChoices() {
             // console.log(score); score works
         }
         currentQuestionIndex++;
+        if (currentQuestionIndex===myQuestions.length || secondsLeft <= 0) {
+            quizResults();
+            return;
+        }
         getChoices();
         console.log(currentQuestionIndex);
     }
@@ -95,6 +103,11 @@ function getChoices() {
             
         }, 1000);
         
+    }
+ 
+    function quizResults() { //function that shows the results and stores it in the local storage
+        feedbackEl.textContent = "Your score is " + score;
+
     }
     
 
