@@ -1,40 +1,14 @@
-var myQuestions = [
-    {
-        question: "Inside which HTML element do we put the JavaScript?",
-        choices: 
-           ["In script element",
-           "In js element",
-           "In header element"],
-        correctAnswer: 0
-    },
-    {   
-        question: "Where is the correct place to insert a JavaScript?",
-        choices: 
-            ["In the body section",
-            "In the head section",
-            "Either body or head section"],
-
-        correctAnswer: 0 
-        
-    },
-    {
-        question: "How do you write 'Hello World' in an alert box?",
-        choices: 
-           ["alert('Hello World')",
-           "msg('Hello World')",
-           "alertBox('Hello World')"],
-        correctAnswer: 0
-    }
-]
 var header1El = document.getElementById("header1");
 var contentEl = document.getElementById("content");
 var startBtnEL = document.getElementById("startBtn");
 var questionEL = document.getElementById("main");
 var timeEl = document.querySelector("#time");
 var feedbackEl = document.getElementById("feedback");
-var choicesEl = document.getElementById("choices")
+var choicesEl = document.getElementById("choices");
+var finalIDEl = document.getElementById("finalID");
+var finalScore = document.getElementById("finalScore");
 var score = 0;
-var secondsLeft = 60;
+var secondsLeft = 15*myQuestions.length;
 var currentQuestionIndex = 0;
 var currentQuestion = myQuestions[currentQuestionIndex];
 
@@ -43,9 +17,6 @@ function startQuiz () {
     startBtnEL.classList.add("d-none"); //hides the start button - works well
     getChoices();
     setTime(); 
-    // if (currentQuestionIndex===myQuestions.length-1 || secondsLeft <= 0) { //ending the quiz
-    //     quizResults();
-    // }
 }
 
 function getChoices() {
@@ -65,7 +36,7 @@ function getChoices() {
         }
     ) 
 }
-    console.log(currentQuestionIndex);
+    // console.log(currentQuestionIndex);
     function questionClick (e) {
         
         e.preventDefault();
@@ -89,7 +60,7 @@ function getChoices() {
             return;
         }
         getChoices();
-        console.log(currentQuestionIndex);
+        // console.log(currentQuestionIndex);
     }
     
     function setTime() {
@@ -97,21 +68,28 @@ function getChoices() {
             secondsLeft--;
             timeEl.textContent = secondsLeft;
             
-            if(secondsLeft === 0) {
+            if(secondsLeft === 0 || currentQuestionIndex===myQuestions.length || secondsLeft <= 0) {
                 clearInterval(timerInterval);
             }
             
         }, 1000);
-        
+       
     }
  
     function quizResults() { //function that shows the results and stores it in the local storage
-        feedbackEl.textContent = "Your score is " + score;
-
+        finalScore.textContent = score;
+        timeEl.classList.add("d-none");
+        feedbackEl.classList.add("d-none");
+        finalIDEl.classList.remove("d-none");
+        finalScore.classList.remove("d-none");
     }
     
 
 startBtnEL.addEventListener("click", startQuiz);
+
+    // if (currentQuestionIndex===myQuestions.length-1 || secondsLeft <= 0) { //ending the quiz
+    //     quizResults();
+    // }
 
     // function startQuiz (e) {
     //     e.preventDefault();
