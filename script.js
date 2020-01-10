@@ -107,7 +107,9 @@ function getChoices() {
         resultsEl.innerHTML = " ";
         for (i=0; i<localStorage.length; i++) {
             var resultsDiv = document.createElement("div");
-            resultsDiv.innerText = localStorage.key[i] + localStorage.value[i];
+            
+            console.log(localStorage.getItem([i.value]))
+            resultsDiv.innerText = localStorage.getItem([i]);
         }
     }
     
