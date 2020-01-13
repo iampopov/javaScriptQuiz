@@ -8,6 +8,7 @@
 }
 
 #finalID {
+    font-size: xx-large;
     margin-left: 15px;
 }
 
@@ -19,11 +20,13 @@
 }
 
 #finalScore {
-    margin: 1rem;
+    1rem 1rem 0 3rem!important;
 }
 
 #highScores {
     margin-left: 2%;
+    cursor: pointer;
+    color: green;
 }
 
 #time {

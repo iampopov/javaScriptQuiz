@@ -10,12 +10,13 @@
 </head>
 <body>
     <div class="row">
-    <p id="highScores">View High Scores</p> 
-    <div class="col-md-1" id="time"></div>
+        <a id="highScores">View High Scores</a> 
+        <div class="col-md-1" id="time"></div>
     </div>  
     <div class="col-md container" id="content">
+    <div class="jumbotron col-lg-6 col-md-10 col-sm-12">
         
-    <div class="col-lg-8 col-md-10 col-sm-12"> 
+    <div class="col-lg col-md-10 col-sm-12"> 
         <div class="row"><h1 class="col-md-10" id="header1">Welcome to the JavaScript Quiz</h1>
         </div>
         <h7 id="main" class="row">
@@ -31,7 +32,6 @@
         <div id="choices">
 
         </div>
-        <br>
         <div class="row">
             <!-- initials element -->
             <input type="text" name="Initials" id="finalID" placeholder="Initials" class="col-md-2 d-none">
@@ -46,7 +46,7 @@
         </div>
         <h2 id="countdown"></h2>
         <div id="quizContainer"></div>
-    <div id="scoresFeedback"></div>
+    <div id="scoresFeedback"><button class="d-none btn btn-success" id="reStartBtn">Start Over!</button></div>
     <div id="results"></div>
     </div>
     <div class="col-2">
@@ -54,6 +54,7 @@
         <div class="col-md-1" id="feedback"></div>
     </div>  
     </div>
+</div>
     <script src="quiz.js"></script>
     <script src="script.js"></script>
 </body>

@@ -1,6 +1,7 @@
 var header1El = document.getElementById("header1");
 var contentEl = document.getElementById("content");
 var startBtnEL = document.getElementById("startBtn");
+var reStartBtnEL = document.getElementById("reStartBtn");
 var storeBtnEl = document.getElementById("storeBtn");
 var questionEL = document.getElementById("main");
 var timeEl = document.querySelector("#time");
@@ -18,7 +19,7 @@ var currentQuestion = myQuestions[currentQuestionIndex];
 
 function startQuiz () {
     header1El.innerHTML = " ";
-    
+    resultsEl.innerHTML = " ";
     startBtnEL = document.getElementById("startBtn");
     startBtnEL.classList.add("d-none"); //hides the start button - works well
     getChoices();
@@ -96,24 +97,43 @@ function getChoices() {
         finalScore.classList.remove("d-none");
         storeBtnEl.classList.remove("d-none");
     }
-
-    function storeResults() {
+    
+        function storeResults() {
+        console.log('started')
         localStorage.setItem(finalIDEl.value, score);
-        scoresFeedbackEl.innerText = 'Results stored! Please view High Scores or refresh the page to start over.'
+        reStartBtnEL.classList.remove("d-none");
+        var scoresMessage = document.createElement("div");
+        scoresMessage.innerText = `Results stored! Please view High Scores or refresh the page to start over.`;
+        scoresFeedbackEl.prepend(scoresMessage);
     }
 
     function renderResults() {
-        console.log("clicked")
+        
+        if (localStorage.length == 0) {
+            resultsEl.innerHTML = " ";
+            var resultsDiv = document.createElement("p");
+            resultsDiv.innerText =`No results stored. Please take a test!`;
+            resultsEl.appendChild(resultsDiv);
+        } else {
+        //console.log("clicked")
         resultsEl.innerHTML = " ";
-        for (i=0; i<localStorage.length; i++) {
-            var resultsDiv = document.createElement("div");
+        for (i = 0; i < localStorage.length; i++) {
+            var testResult = localStorage.getItem(localStorage.key(i));
+            var testKey = localStorage.key(i);
+            var resultsDiv = document.createElement("p");
+            //console.log(localStorage.key(i));
+            //console.log(testResult);
             
-            console.log(localStorage.getItem([i.value]))
-            resultsDiv.innerText = localStorage.getItem([i]);
+            resultsDiv.innerText =`${testKey} score is ${testResult}`;
+            resultsEl.appendChild(resultsDiv);
         }
-    }
+    }}
     
+function refresh () {
+    location.reload();
+}
 
 startBtnEL.addEventListener("click", startQuiz);
 storeBtnEl.addEventListener("click", storeResults);
 highScoresEl.addEventListener("click", renderResults);
+reStartBtnEL.addEventListener("click", refresh);
