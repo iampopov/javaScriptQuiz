@@ -1,16 +1,13 @@
-# Unit 04 Web APIs Homework: Code Quiz
+# JavaScript Quiz application
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment. These assessments are typically a combination of multiple-choice questions and interactive challenges. In this homework assignment, your challenge is to build a code quiz with multiple-choice questions.
-
-
-## JavaScript Quiz application
-
-This application is a timer-based quiz application that stores high scores client-side. 
+This application is a timer-based quiz application that stores high scores client-side.
 
 ## User Story
+
 As a coding bootcamp student
 I want to take a timed quiz on JavaScript fundamentals that stores high scores
 so that I can gauge my progress compared to my peers
+
 ```
 ## Quiz flow
 
@@ -36,5 +33,4 @@ so that I can gauge my progress compared to my peers
 * The timer stops when all questions have been answered or the timer reaches 0.
 
 * After the game ends, the user can save their initials and score to a highscores view using local storage.
-
-
+```
